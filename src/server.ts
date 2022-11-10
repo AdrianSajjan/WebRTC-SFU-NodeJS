@@ -32,7 +32,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/save-chunks", upload.single("buffer"), async (req, res) => {
-  console.log(req.file);
   res.send("Saved");
 });
 
@@ -64,8 +63,6 @@ app.post("/stream", async ({ body }, res) => {
 });
 
 function handleTrackEvent(e: RTCTrackEvent, peer: RTCPeerConnection) {
-  console.log("Handle Track event");
-  console.log(e.streams);
   senderStream = e.streams[0];
 }
 

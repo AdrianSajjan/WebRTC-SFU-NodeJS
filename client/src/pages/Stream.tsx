@@ -119,7 +119,7 @@ const StreamPage: React.FC = () => {
     <Paper mih="100vh">
       <Grid mih="100vh" gutter={0}>
         <Grid.Col span={mobile ? 12 : 8} bg="black">
-          <video muted height="calc(100% - 10px)" width="100%" autoPlay ref={video}></video>
+          <video height="calc(100% - 10px)" width="100%" autoPlay ref={video}></video>
         </Grid.Col>
         <Grid.Col span={mobile ? 12 : 4}>
           <Flex direction="column" h="100%">
