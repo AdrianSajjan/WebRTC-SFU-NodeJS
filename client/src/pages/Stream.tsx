@@ -1,3 +1,4 @@
+import * as uuid from "uuid";
 import * as React from "react";
 import { Navigate } from "react-router-dom";
 import { useMediaQuery } from "@mantine/hooks";
@@ -25,7 +26,7 @@ const StreamPage: React.FC = () => {
     if (!video.current) return;
     stream.current = await initializeStream(type, { audio: true, video: true }, video.current);
     handlePeerToPeerSharing(stream.current);
-    recorder.current = initializeRecorder(stream.current, { mimeType: "video/webm; codecs=vp9" }, { uuid: session.uuid });
+    recorder.current = initializeRecorder(stream.current, { mimeType: "video/webm; codecs=vp9" }, { uuid: uuid.v4() });
     handle.current = recordVideoAsChunks(recorder.current, 5000);
     setStreaming(true);
   };
