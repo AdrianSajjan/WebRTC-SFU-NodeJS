@@ -6,7 +6,9 @@
     "outDir": "./dist",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true
+    "strict": true,
+    "noImplicitAny": false
   },
-  "exclude": ["webrtc", "client"]
+  "include": ["src/**/*", "index.d.ts"],
+  "exclude": ["client"]
 }

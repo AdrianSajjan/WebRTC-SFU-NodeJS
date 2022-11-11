@@ -6,9 +6,7 @@ declare module "wrtc" {
   export const RTCDtlsTransport: RTCDtlsTransport;
   export const RTCIceCandidate: RTCIceCandidate;
   export const RTCIceTransport: RTCIceTransport;
-  export const RTCPeerConnection: new (
-    constraint: RTCConfiguration
-  ) => RTCPeerConnection;
+  export const RTCPeerConnection: new (constraint: RTCConfiguration) => RTCPeerConnection;
   export const RTCPeerConnectionIceEvent: RTCPeerConnectionIceEvent;
   export const RTCRtpReceiver: RTCRtpReceiver;
   export const RTCRtpSender: RTCRtpSender;
@@ -18,7 +16,4 @@ declare module "wrtc" {
     new (descriptionInitDict: RTCSessionDescriptionInit): RTCSessionDescription;
     prototype: RTCSessionDescription;
   };
-  export const getUserMedia: getUserMedia;
-  export const mediaDevices: mediaDevices;
-  export const nonstandard: nonstandard;
 }
