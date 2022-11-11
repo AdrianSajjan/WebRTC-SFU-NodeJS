@@ -1,6 +1,7 @@
 import cors from "cors";
 import webrtc from "wrtc";
 import morgan from "morgan";
+import fs from "fs/promises";
 import express from "express";
 
 import upload from "./lib/multer";
@@ -14,7 +15,33 @@ app.use(morgan("tiny"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post("/save-chunks", upload.single("buffer"), async (req, res) => res.json(req.file));
+app.post("/save-chunks", upload.single("buffer"), async (req, res) => {
+  if (!req.file) {
+    console.log("File not writeable to disk");
+    return res.status(500).json({ message: "Unable to save file tp disk" });
+  }
+
+  try {
+    const temp = `${req.file.destination}/${req.file.filename}`;
+    const data = await fs.readFile(temp);
+    const file = `./data/${req.query.uuid}.webm`;
+
+    try {
+      await fs.access(file);
+      await fs.appendFile(file, data);
+    } catch (e) {
+      await fs.writeFile(file, data);
+    }
+
+    await fs.unlink(temp);
+    await fs.rmdir(req.file.destination);
+
+    res.json(req.file);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
 
 app.post("/watch", async ({ body }, res) => {
   const peer = new webrtc.RTCPeerConnection({ iceServers: [{ urls: "stun:stun.stunprotocol.org" }] });
